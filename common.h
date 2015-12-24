@@ -3,22 +3,22 @@
 
 enum
 {
-	BUF_SIZE = 255,
+    BUF_SIZE = 255,
 
-	MSG_OK = 1,
-	MSG_CONTINUE = 2,
-	MSG_EXIT = 3
+    MSG_OK = 1,
+    MSG_CONTINUE = 2,
+    MSG_EXIT = 3
 };
 
 typedef struct message
 {
-	long mtype;
-	char mtext[BUF_SIZE + 1]; //for '\0'
+    long mtype;
+    char mtext[BUF_SIZE + 1]; //for '\0'
 } message;
 
 enum
 {
-	MSG_SIZE = sizeof(message) - sizeof(long)
+    MSG_SIZE = sizeof(message) - sizeof(long)
 };
 
 #endif //COMMON_H_INCLUDED
