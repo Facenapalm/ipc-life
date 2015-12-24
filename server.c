@@ -83,30 +83,38 @@ main(int argc, char *argv[])
         return 3;
     }
 
-    bool terminate = false;
-    char *args[MAX_ARGUMENTS];
-    int args_count;
-    char *answer;
-    char *cur_scanline;
-    unsigned block_size;
-    FILE *file;
-
-    unsigned long long end_generation = 0;
-
-    message message;
-    memset(&message, 0, sizeof(message));
-
     key_t key_in = ftok("life-server", 'a');
     key_t key_out = ftok("life-server", 'b');
     int msg_in_id = msgget(key_in, IPC_CREAT | 0666);
     int msg_out_id = msgget(key_out, IPC_CREAT | 0666);
+
+    message message;
+    memset(&message, 0, sizeof(message));
+
+    //splitted messagge
+    char *args[MAX_ARGUMENTS];
+    int args_count;
+
+    unsigned long long end_generation = 0;
+
+    //answer, sended to client
+    char *answer;
+
+    //temporary variables, used in snapshot
+    unsigned block_size;
+    char *cur_scanline;
+
+    //temporary variable, used in loading from / saving to file
+    FILE *file;
+
+    bool terminate = false;
     do {
         answer = (char *) ERROR_NO;
 
         if (end_generation == 0) {
             msgrcv(msg_in_id, &message, MSG_SIZE, 0, 0);
         } else {
-            //we're calculationg now
+            //we're calculating now
             message.mtype = -1;
             msgrcv(msg_in_id, &message, MSG_SIZE, 0, IPC_NOWAIT);
             if (message.mtype == -1) {
