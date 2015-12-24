@@ -83,6 +83,6 @@ bool chunk_do_turn(Chunk *); //returns false if field is stable
 bool chunk_undo_turn(Chunk *);
 void chunk_clear(Chunk *);
 
-//all functions will not work correctly with unitialized Frane * or Chunk * pointers
+//all functions will not work correctly with unitialized Frame * or Chunk * pointers
 
 #endif //CORE_H_INCLUDED
