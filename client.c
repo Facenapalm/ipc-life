@@ -28,4 +28,5 @@ int main(void)
 
     msgctl(key_out, IPC_RMID, NULL);
     msgctl(key_in, IPC_RMID, NULL);
+    return 0;
 }
